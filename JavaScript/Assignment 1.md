@@ -106,15 +106,15 @@ Answer: False.
 
 ## Section C: Fill in the Blanks
 
-**1. JavaScript was created by ______________ in the year ______________.
+**1. JavaScript was created by ______________ in the year ______________.**
 
-2. The three technologies used in Front-end development are __________, __________, and __________.
+**2. The three technologies used in Front-end development are __________, __________, and __________.**
    
-3. JavaScript engines: Chrome uses __________, Firefox uses __________.
+**3. JavaScript engines: Chrome uses __________, Firefox uses __________.**
    
-4. In the restaurant analogy: Customer = __________, Waiter = __________, Chef = __________.
+**4. In the restaurant analogy: Customer = __________, Waiter = __________, Chef = __________.**
    
-5. JavaScript file extension is __________.**
+**5. JavaScript file extension is __________.**
 
 **Answer**
 
