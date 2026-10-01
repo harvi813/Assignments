@@ -1,0 +1,58 @@
+# Question 71
+
+Output:Pass
+
+Reason: marks >= 40 is already true for 85, so Python executes that block and does not check the later elif.
+
+# Question 72
+
+Outputs:
+95 → A
+85 → B
+50 → Pass
+30 → Fail
+
+The conditions are arranged from the highest range to the lowest range, so the first matching condition gives the correct classification.
+
+# Question 73
+
+For:
+age = 20
+has_id = True
+
+
+Output:
+Entry Allowed
+
+For:
+age = 20
+has_id = False
+
+
+Output:
+ID Required
+
+For:
+age = 16
+has_id = True
+
+
+Output:
+Underage
+
+# Question 74
+
+For the supplied choices:
+1 → Add
+3 → Delete
+5 → Invalid Choice
+
+The case _ is the default case. It runs when none of the other cases match.
+
+# Question 75
+
+Output:
+82 80 → Grade B
+92 80 → Grade A
+55 80 → Pass
+92 60 → Not Eligible
