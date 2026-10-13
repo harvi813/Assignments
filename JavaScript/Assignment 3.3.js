@@ -136,4 +136,62 @@ let result=score<=marks
 console.log(result)
 
 //3
+//The output is true,false and true.
 
+//4
+//The output is true,true and true.
+
+//5
+//JavaScript converts undefined into NaN. NaN compared with any number results in false.
+
+//6
+let max=10
+let books=10
+let result=books<=max
+console.log(result)
+
+//7
+console.log(false <= 0);
+//JavaScript converts false to the 0.Therefore, 0 <= 0 is true.
+console.log("" <= 0);
+//JavaScript converts empty string to the 0.Therefore, 0 <= 0 is true.
+console.log(NaN <= 5);
+//The result is false. Any relational comparision involving NaN returns false.
+
+// =====================================================
+// Mixed Practice (>, <, >=, <=)
+// =====================================================
+
+//1
+//a
+let age=18
+let required=18
+let result=age>=required
+console.log(result)
+
+//b
+let temp=32
+let standard=35
+let result=temp<standard
+console.log(result)
+
+//c
+let score=90
+let standard=85
+let result=score>standard
+console.log(result)
+
+//2
+//The output is true,true,false and false.
+
+//3
+let price=499
+let money=500
+let can_buy=money>=price
+let change=price<money
+console.log(can_buy)
+console.log(change)
+
+//4
+//For the first expresion since both are strings, JavaScripyt compares them chrachter by charcter by ASCII values. And since the ASCII value  of 1 is less than the ASCII value of 2,the result is false.
+//For the second expression both are numbers,therfore JavaScript compares them normally and thus the result is true.
