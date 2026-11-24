@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Clone</title>
+    <style>
+      
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Circular Std', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .logo img {
+            width : 150px;
+            height: 45px;
+
+        }
+
+        
+        .app-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+       
+        .sidebar {
+            width: 240px;
+            background-color: #000000;
+            display: flex;
+            flex-direction: column;
+            padding: 24px 0;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            padding: 0 24px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: -1px;
+        }
+
+        .nav-section {
+            padding: 0 12px;
+            margin-bottom: 24px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            color: #b3b3b3;
+            font-weight: 700;
+            font-size: 14px;
+            border-radius: 4px;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-item:hover {
+            color: #ffffff;
+        }
+
+        .nav-item.active {
+            background-color: #282828;
+            color: #ffffff;
+        }
+
+        .nav-icons{
+            width:25px;
+            height:25px;
+            margin-right:25px;
+        }
+
+        .library-section {
+            padding: 0 12px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            color: #b3b3b3;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: color 0.2s;
+            margin-bottom: 8px;
+        }
+
+        .action-btn:hover {
+            color: #ffffff;
+        }
+
+        .action-btn .icon-box {
+            width: 24px;
+            height: 24px;
+            margin-right: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .icon-box.create {
+            background-color: #b3b3b3;
+            color: black;
+            border-radius: 2px;
+        }
+        
+        .icon-box.liked {
+            background: linear-gradient(135deg, #450af5, #c4efd9);
+            color: white;
+            border-radius: 2px;
+        }
+
+        .icon-box.episodes {
+            background-color: #148a08;
+            color: white;
+            border-radius: 2px;
+        }
+
+        .playlist-header {
+            padding: 16px 12px 8px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        .playlist-item {
+            padding: 8px 12px;
+            font-size: 14px;
+            color: #b3b3b3;
+            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .playlist-item:hover {
+            color: #ffffff;
+        }
+        .install{
+            width: 22px;
+            height: 22px;
+            margin-right:10px;
+            margin-top: 5px;
+        }
+
+        .install-app {
+            padding-left:15px;
+            display: flex;
+            align-items: center;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            border-top: 1px solid #282828;
+            text-align: center;
+        }
+        .main-view {
+            flex: 1;
+            background-color: #121212;
+            border-radius: 8px;
+            margin: 8px 8px 0 0; 
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .top-bar {
+             position: sticky;
+             top: 0;
+             background-color: rgba(18, 18, 18, 0.9);
+             padding: 16px 32px;
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             z-index: 10;
+        }
+
+        .nav-arrows {
+            width: 70px;
+            height: 32px;
+        }
+
+        .user-profile {
+            width: 100px;
+            height: 32px;
+        }
+
+        .content-area {
+            padding: 24px 32px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+
+        
+        .morning-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .morning-card {
+            height: 80px;
+            background-color: #2a2a2a;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .morning-card:hover {
+            background-color: #333333;
+        }
+
+        .morning-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            box-shadow: 0 4px 60px rgba(0,0,0,.5);
+        }
+
+        .morning-card span {
+            padding: 0 16px;
+            font-weight: 700;
+            font-size: 14px;
+            flex: 1;
+        }
+
+       
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 20px;
+        }
+
+        .see-all {
+            font-size: 12px;
+            font-weight: 700;
+            color: #b3b3b3;
+            cursor: pointer;
+            letter-spacing: 1px;
+        }
+        
+        .see-all:hover {
+            text-decoration: underline;
+        }
+
+        .shows-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 24px;
+        }
+
+        .show-card {
+            background-color: #181818;
+            padding: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .show-card:hover {
+            background-color: #282828;
+        }
+
+        .show-card-img-container {
+            margin-bottom: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        }
+
+        .show-card img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .show-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .show-desc {
+            font-size: 14px;
+            color: #b3b3b3;
+            line-height: 1.4;
+            overflow: hidden;
+        }
+
+    
+        .player-bar {
+            height: 90px;
+            background-color: #181818;
+            border-top: 1px solid #282828;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 100;
+        }
+
+        .player-left {
+            display: flex;
+            align-items: center;
+            width: 30%;
+            min-width: 180px;
+        }
+
+        .album-art {
+            width: 56px;
+            height: 56px;
+            margin-right: 14px;
+            background-color: #333;
+        }
+        
+        .album-art img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .song-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .song-title {
+            font-size: 14px;
+            font-weight: 400;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+        
+        .song-title:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .song-artist {
+            font-size: 11px;
+            color: #b3b3b3;
+        }
+        
+        .song-artist:hover {
+            text-decoration: underline;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        .like-icon {
+            width:25px;
+            height:25px;
+            margin-left:55px;
+        }
+        .music-player{
+            width:450px;
+            height:60px;
+            margin-left:100px;
+        }
+
+        .right-options{
+            width: 300px;
+            height:25px;
+            margin-left:200px;
+        }
+        .device-bar{
+            background-color: #1db954;
+            width:100%;
+            height:20px;
+            text-align: right;
+            color: #000000;
+            font-size: 15px;
+            font-weight:bolder;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+       
+        <aside class="sidebar">
+            <div class="logo">
+               <img src="Spotify logo.png">
+            </div>
+
+            <nav class="nav-section">
+                <div class="nav-item active">
+                    <img class="nav-icons" src="Home.png">
+                    Home
+                </div>
+                <div class="nav-item">
+                    <img class="nav-icons" src="Search.png">
+                    Search
+                </div>
+                <div class="nav-item">
+                    <img class="nav-icons" src="Your library.png">
+                    Your Library
+                </div>
+            </nav>
+
+            <div class="library-section">
+                <div class="action-btn">
+                    <div class="icon-box create">
+                        <img src="Create.png">
+                    </div>
+                    Create Playlist
+                </div>
+                <div class="action-btn">
+                    <div class="icon-box liked">
+                        <img src="Group 2.png">
+                    </div>
+                    Liked Songs
+                </div>
+                <div class="action-btn">
+                    <div class="icon-box episodes">
+                        <img src="your episodes.png">
+                    </div>
+                    Your Episodes
+                </div>
+
+                <div class="playlist-header">FAV</div>
+                <div class="playlist-item">Daily Mix 1</div>
+                <div class="playlist-item">Discover Weekly</div>
+                <div class="playlist-item">Malayalam</div>
+                <div class="playlist-item">Dance / Electronix Mix</div>
+                <div class="playlist-item">EDM / Popular</div>
+            </div>
+
+            <div class="install-app">
+                <img class="install" src="grommet-icons_install-option.png">
+                Install App
+            </div>
+        </aside>
+
+        <main class="main-view">
+            <header class="top-bar">
+                <div>
+                    <img class="nav-arrows" src="top arrow navigation.png">
+                    <div class="arrow-btn">
+                    </div>
+                    <div class="arrow-btn">
+                        
+                    </div>
+                </div>
+                <div>
+                    <img class="user-profile" src="User.png">
+                </div>
+            </header>
+
+            <div class="content-area">
+                <h2>Good morning</h2>
+                
+                <div class="morning-grid">
+                    <div class="morning-card">
+                        <div style="width:80px; height:80px;background-image: url(Liked.png);background-size: cover; display:flex; justify-content:center; align-items:center;">
+                            
+                        </div>
+                        <span>Liked Songs</span>
+                    </div>
+                    <div class="morning-card">
+                        <img src="image4.png" alt="Neffex">
+                        <span>Neffex Playlist</span>
+                    </div>
+                    <div class="morning-card">
+                        <img src="image3.png" alt="K/DA">
+                        <span>K/DA</span>
+                    </div>
+                    <div class="morning-card">
+                        <img src="image1.png" alt="Liked Songs">
+                        <span>Liked Songs</span>
+                    </div>
+                    <div class="morning-card">
+                        <img src="image2.png" alt="Dance">
+                        <span>Dance / Electronic Mix</span>
+                    </div>
+                </div>
+
+                <div class="section-header">
+                    <h2>Shows you might like</h2>
+                    <span class="see-all">SEE ALL</span>
+                </div>
+
+                <div class="shows-grid">
+                    <div class="show-card">
+                        <div class="show-card-img-container">
+                            <img src="image9.png" alt="Weekly Motivation">
+                        </div>
+                        <div class="show-title">Weekly Motivatio...</div>
+                        <div class="show-desc">Ben Ira Scott</div>
+                    </div>
+                    <div class="show-card">
+                        <div class="show-card-img-container">
+                            <img src="image8.png" alt="Meditation">
+                        </div>
+                        <div class="show-title">MEDITATION SELF</div>
+                        <div class="show-desc">Ibn Hussain Alaan</div>
+                    </div>
+                    <div class="show-card">
+                        <div class="show-card-img-container">
+                            <img src="image7.png" alt="Words">
+                        </div>
+                        <div class="show-title">Words beyond act...</div>
+                        <div class="show-desc">Samuel Scott</div>
+                    </div>
+                    <div class="show-card">
+                        <div class="show-card-img-container">
+                            <img src="image6.png" alt="Alexa">
+                        </div>
+                        <div class="show-title">The Alexa Show</div>
+                        <div class="show-desc">Adriana Tom</div>
+                    </div>
+                    <div class="show-card">
+                        <div class="show-card-img-container">
+                            <img src="image5.png" alt="Stories">
+                        </div>
+                        <div class="show-title">The Stories of Ma...</div>
+                        <div class="show-desc">Levis</div>
+                    </div>
+                    <div class="show-card">
+                        <div class="show-card-img-container">
+                            <img src="image10.png" alt="Daily">
+                        </div>
+                        <div class="show-title">Motivation Daily b...</div>
+                        <div class="show-desc">Georgina Martha</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    
+    <div class="player-bar">
+        <div class="player-left">
+            <div class="album-art">
+                <img src="image11.png" alt="Album Art">
+            </div>
+            <div class="song-info">
+                <div class="song-title">Dreaming On</div>
+                <div class="song-artist">NEFFEX</div>
+            </div>
+            <div>
+            <img class="like-icon" src="bx_bxs-heart.png">
+            </div>
+        </div>
+
+        <div class="player-center">
+            <img class="music-player" src="Music Player Options.png">
+        </div>
+        <div class>
+            <img class="right-options" src="Right options.png">
+        </div>
+    </div>   
+        <div class="device-bar">
+        <pre>Listening on ASUS-ROG-G531GT                 </pre>
+        </div>
+
+</body>
+</html>

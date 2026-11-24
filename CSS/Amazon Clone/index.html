@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amazon.in</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Arial', sans-serif;
+    background-image:linear-gradient(to bottom, #0c1214, #517184);
+    color: #0f1111;
+  }
+
+
+  .top-header {
+    background-color: #131921;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    height: 60px;
+    position: relative;
+    z-index: 100;
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-right: 4px;
+    flex-shrink: 0;
+  }
+
+  .logo-container:hover {
+    border-color: #fff;
+  }
+
+  .logo-container img {
+    height: 30px;
+  }
+
+  .logo-text {
+    color: #fff;
+    font-size: 21px;
+    font-weight: bold;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-text .in {
+    font-size: 12px;
+    color: #fff;
+    margin-left: 2px;
+  }
+  .logo-text img{
+    height:100%;
+  }
+
+  .logo-smile {
+    color: #febd69;
+    font-size: 10px;
+    display: block;
+    margin-top: -2px;
+  }
+
+  .address-container {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-right: 4px;
+    flex-shrink: 0;
+  }
+
+  .address-container:hover {
+    border-color: #fff;
+  }
+  .address-container img{
+    width: 18px;
+    height: 18px;
+  }
+  .address-icon {
+    color: #fff;
+    font-size: 18px;
+    margin-right: 4px;
+  }
+
+  .address-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .address-text .hello {
+    color: #ccc;
+    font-size: 12px;
+  }
+
+  .address-text .location {
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+
+  .search-container {
+    display: flex;
+    flex: 1;
+    max-width: 780px;
+    height: 40px;
+    margin: 0 8px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .search-category {
+    background-color: #f3f3f3;
+    border: none;
+    padding: 0 8px;
+    font-size: 12px;
+    color: #555;
+    cursor: pointer;
+    border-right: 1px solid #ccc;
+    min-width: 50px;
+  }
+
+  .search-input {
+    flex: 1;
+    border: none;
+    padding: 0 10px;
+    font-size: 15px;
+    outline: none;
+  }
+
+  .search-btn {
+    background-color: #febd69;
+    border: none;
+    width: 46px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('search icon.png');
+    background-size: 22px 22px;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: background 0.2s;
+  }
+
+  .search-btn:hover {
+    background-color: #f3a847;
+  }
+
+  .search-btn svg {
+    width: 22px;
+    height: 22px;
+  }
+
+ 
+  .header-right {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .header-item {
+    display: flex;
+    flex-direction: column;
+    padding: 4px 8px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+    margin-right: 2px;
+  }
+
+  .header-item:hover {
+    border-color: #fff;
+  }
+
+  .header-item .line1 {
+    font-size: 12px;
+    color: #ccc;
+  }
+
+  .header-item .line2 {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .lang-selector {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-right: 2px;
+  }
+
+  .lang-selector:hover {
+    border-color: #fff;
+  }
+
+  .lang-flag {
+    width: 22px;
+    height: 16px;
+    margin-right: 4px;
+    border-radius: 1px;
+  }
+
+  .lang-text {
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .cart-container {
+    display: flex;
+    align-items: flex-end;
+    padding: 4px 8px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .cart-container:hover {
+    border-color: #fff;
+  }
+
+  .cart-icon {
+    position: relative;
+    font-size: 28px;
+    margin-right: 4px;
+  }
+
+
+  .cart-text {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+ 
+  .secondary-nav {
+    background-color: #232f3e;
+    display: flex;
+    align-items: center;
+    padding: 4px 12px;
+    height: 39px;
+    overflow-x: auto;
+  }
+
+  .nav-item {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 6px 10px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    white-space: nowrap;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-item:hover {
+    border-color: #fff;
+  }
+
+  .nav-item.all-nav {
+    font-weight: bold;
+    font-size: 15px;
+  }
+
+  .nav-item.all-nav .hamburger {
+    margin-right: 4px;
+    font-size: 18px;
+  }
+
+  .nav-item .prime-text {
+    color: #fff;
+  }
+
+  .nav-item .prime-text span {
+    color: #56a9e8;
+    font-weight: bold;
+  }
+
+  .nav-item .dropdown-arrow {
+    font-size: 10px;
+    margin-left: 2px;
+  }
+
+  .lion{
+    width:100%;
+    height: 100%;
+    background-image: url('lion.png');
+    margin-left: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+ 
+  .prime-day-banner {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    padding: 4px 10px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    text-decoration: none;
+  }
+
+  .prime-day-banner:hover {
+    border-color: #fff;
+  }
+
+  .prime-day-banner .pd-text {
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 4px;
+  }
+
+  .prime-day-banner .pd-text .prime-logo {
+    font-style: italic;
+    font-size: 16px;
+  }
+
+  .prime-day-banner .pd-date {
+    color: #fff;
+    font-size: 12px;
+  }
+
+  .prime-day-banner .pd-arrow {
+    color: #fff;
+    font-size: 18px;
+    margin-left: 4px;
+  }
+
+
+  .hero-banner {
+    position: relative;
+    width: 100%;
+    height: 485px;
+    background-image: url('background picture.png');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .hero-content {
+    position: absolute;
+    top: 50%;
+    left: 15%;
+    transform: translateY(-50%);
+    color: #fff;
+    z-index: 2;
+  }
+
+  .hero-content h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 12px;
+  }
+
+  .hero-content h1 .rupee {
+    font-size: 28px;
+  }
+
+  .hero-content h2 {
+    font-size: 22px;
+    font-weight: normal;
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+
+  .hero-content .coupon-text {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .hero-badges {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .hero-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .hero-badge-icon {
+    width: 36px;
+    height: 36px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .hero-badge-text {
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1.3;
+  }
+
+  .hero-badge-divider {
+    width: 1px;
+    height: 30px;
+    background: rgba(255,255,255,0.4);
+  }
+
+  .hero-image {
+    position: absolute;
+    right: 15%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+
+  .hero-image img {
+    max-height: 320px;
+  }
+
+  .hero-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 40px;
+    cursor: pointer;
+    z-index: 3;
+    background: transparent;
+    border: none;
+    padding: 10px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+
+  .hero-arrow.left {
+    left: 10px;
+  }
+
+  .hero-arrow.right {
+    right: 10px;
+  }
+
+  
+  .cards-row {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    margin-top: -120px;
+    position: relative;
+    z-index: 10;
+    max-width: 1500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .card {
+    background: #fff;
+    padding: 20px;
+    flex: 1;
+    min-width: 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  .card h3 {
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .card-grid-item {
+    cursor: pointer;
+  }
+
+  .card-grid-item img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 2px;
+  }
+
+  .card-grid-item p {
+    font-size: 12px;
+    color: #0f1111;
+    margin-top: 4px;
+  }
+
+  .card-link {
+    color: #007185;
+    font-size: 13px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .card-link:hover {
+    color: #c7511f;
+    text-decoration: underline;
+  }
+
+  
+  .card-clearance .clearance-img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 2px;
+    margin-bottom: 12px;
+  }
+
+
+  .card-signin {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-signin h3 {
+    font-size: 21px;
+    margin-bottom: 16px;
+  }
+
+  .signin-btn {
+    background: #ffd814;
+    border: 1px solid #fcd200;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 16px;
+    font-weight: normal;
+  }
+
+  .signin-btn:hover {
+    background: #f7ca00;
+  }
+
+  .card-signin .laptops-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 2px;
+  }
+  .card-diff{
+    height: 220px;
+  }
+  .card-diff img{
+    width:90%;
+    height:auto;
+    padding-left:50px;
+  }
+  
+</style>
+</head>
+<body>
+
+
+<header class="top-header">
+ 
+  <a href="#" class="logo-container">
+    <div class="logo-text">
+    <img src="logo.png" alt="Amazon">
+    </div>
+  </a>
+
+
+  <div class="address-container">
+    <span class="address-icon"><img src="location.png" alt="Location"></span>
+    <div class="address-text">
+      <span class="hello">Hello</span>
+      <span class="location">Select your address</span>
+    </div>
+  </div>
+
+
+  <div class="search-container">
+    <select class="search-category">
+      <option>All</option>
+    </select>
+    <input type="text" class="search-input" placeholder="">
+    <button class="search-btn"></button>
+  </div>
+
+ 
+  <div class="header-right">
+  
+    <div class="lang-selector">
+      <img src="indian flag.png" alt="IN" class="lang-flag">
+      <span class="lang-text">▼</span>
+    </div>
+
+    <a href="#" class="header-item">
+      <span class="line1">Hello, Sign in</span>
+      <span class="line2">Account & Lists ▾</span>
+    </a>
+
+  
+    <a href="#" class="header-item">
+      <span class="line1">Returns</span>
+      <span class="line2">& Orders</span>
+    </a>
+
+
+    <a href="#" class="cart-container">
+      <div class="cart-icon">
+        <img src="cart icon.png">
+        <span class="cart-count"></span>
+      </div>
+      <span class="cart-text">Cart</span>
+    </a>
+  </div>
+</header>
+
+
+<nav class="secondary-nav">
+  <a href="#" class="nav-item all-nav">
+    <span class="hamburger">☰</span> All
+  </a>
+  <a href="#" class="nav-item">Best Sellers</a>
+  <a href="#" class="nav-item">Mobiles</a>
+  <a href="#" class="nav-item">Customer Service</a>
+  <a href="#" class="nav-item">Today's Deals</a>
+  <a href="#" class="nav-item">Fashion</a>
+  <a href="#" class="nav-item">Electronics</a>
+  <a href="#" class="nav-item">Books</a>
+  <a href="#" class="nav-item">
+    <span class="prime-text"><span>Prime</span> ▾</span>
+  </a>
+  <a href="#" class="nav-item">New Releases</a>
+  <a href="#" class="nav-item">Home & Kitchen</a>
+  <a href="#" class="nav-item">Amazon Pay</a>
+  <div class="lion"></div>
+
+  <a href="#" class="prime-day-banner">
+    <span class="pd-text"><span class="prime-logo">prime day</span></span>
+    <span class="pd-date">23<sup>rd</sup>-24<sup>th</sup> July</span>
+    <span class="pd-arrow">›</span>
+  </a>
+</nav>
+
+
+<section class="hero-banner">
+  <button class="hero-arrow left">‹</button>
+  <button class="hero-arrow right">›</button>
+</section>
+
+
+<section class="cards-row">
+
+ 
+  <div class="card">
+    <h3>Upgrade your home | Amazon Brands & more</h3>
+    <div class="card-grid">
+      <div class="card-grid-item">
+        <img src="image 17.png" alt="Smart LED TVs">
+        <p>Smart LED TVs</p>
+      </div>
+      <div class="card-grid-item">
+        <img src="image 18.png" alt="Appliances">
+        <p>Appliances</p>
+      </div>
+      <div class="card-grid-item">
+        <img src="image 20.png" alt="Furniture">
+        <p>Furniture</p>
+      </div>
+      <div class="card-grid-item">
+        <img src="image 19.png" alt="Kitchen products">
+        <p>Kitchen products</p>
+      </div>
+    </div>
+    <a href="#" class="card-link">Shop now</a>
+  </div>
+
+
+  <div class="card">
+    <h3>Revamp your home in style</h3>
+    <div class="card-grid">
+      <div class="card-grid-item">
+        <img src="image 25.png" alt="Bedsheets, curtains & more">
+        <p>Bedsheets, curtains & more</p>
+      </div>
+      <div class="card-grid-item">
+        <img src="image 24.png" alt="Home decoration">
+        <p>Home decoration</p>
+      </div>
+      <div class="card-grid-item">
+        <img src="image 22.png" alt="Home storage">
+        <p>Home storage</p>
+      </div>
+      <div class="card-grid-item">
+        <img src="image 21.png" alt="Lighting solutions">
+        <p>Lighting solutions</p>
+      </div>
+    </div>
+    <a href="#" class="card-link">Explore all</a>
+  </div>
+
+  
+  <div class="card card-clearance">
+    <h3>Up to 70% off | Clearance store</h3>
+    <img src="image 26.png" alt="Clearance store" class="clearance-img">
+    <a href="#" class="card-link">See more</a>
+  </div>
+
+<div class="card-diff">
+  <div class="card card-signin">
+    <h3>Sign in for your best experience</h3>
+    <button class="signin-btn">Sign in securely</button>
+  </div><br><br><br>
+    <img src="image 28.png" alt="Laptops from top brands" class="laptops-img">
+</div>
+</section>
+
+</body>
+</html>

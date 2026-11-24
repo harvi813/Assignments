@@ -1,0 +1,184 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: #fff;
+    color: #333;
+}
+
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background-color: #fff;
+}
+
+.logo {
+    font-weight: 900;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+.cart-img{
+    height: 25px;
+}
+
+.cart-main {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    flex-direction: row;
+}
+
+.white{
+    width:15px;
+}
+
+.hero {
+    width: 100%; 
+    height: 450px;
+    background-image: url(kw-background.png);
+    background-size: cover;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-text {
+    z-index: 2;
+    color: white;
+}
+
+.hero-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero-text h5 {
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+.hero-image {
+    z-index: 2;
+    height: 380px;
+    object-fit: contain;
+    margin-right: 50px; 
+}
+
+.section {
+    padding: 60px 50px;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    color: #000;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+.card {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-details {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    flex-grow: 1; 
+}
+
+.card-details h5 {
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+    color: #000;
+}
+
+.card-details p {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.money {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.money h4 {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.add-btn {
+    background-color: #5c8df6;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-icon {
+    font-size: 0.8rem;
+}
+
+.book-card {
+    max-width: 180px; 
+}
+
+.book-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    background-color: #eee; 
+}
+
+.game-card {
+    max-width: 250px;
+}
+
+.game-img {
+    width: 100%;
+    height: 200px;
+    background-color: #ffca28; 
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.handmade-card {
+    max-width: 255px;
+}
+
+.handmade-img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fff;
+}

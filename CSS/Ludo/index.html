@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ludo Board</title>
+  <style>
+   
+    :root {
+      --c: 83px;               
+      --red: #e83322;
+      --green: #388023;
+      --blue: #051df5;
+      --yellow: #fffd53;
+      --line: #000;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+    }
+
+    
+    .board {
+      display: grid;
+      grid-template-columns: repeat(15, var(--c));
+      grid-template-rows: repeat(15, var(--c));
+      outline: 1px solid var(--red);
+      margin-top: 2px;
+    }
+
+    
+    .home { position: relative; }
+    .home.red    { grid-area: 1 / 1 / 7 / 7;   background: var(--red);    --col: var(--red); }
+    .home.green  { grid-area: 1 / 10 / 7 / 16; background: var(--green);  --col: var(--green); }
+    .home.blue   { grid-area: 10 / 1 / 16 / 7; background: var(--blue);   --col: var(--blue); }
+    .home.yellow { grid-area: 10 / 10 / 16 / 16; background: var(--yellow); --col: var(--yellow); }
+
+    .home .box {
+      position: absolute;
+      inset: var(--c);                 
+      background: #fff;
+      display: grid;
+      grid-template: 1fr 1fr / 1fr 1fr;
+      place-items: center;
+    }
+
+    .home .box span {
+      width: 82px;
+      height: 82px;
+      border: 7px solid var(--col);
+      border-radius: 50%;
+    }
+
+    
+    .path { display: grid; }
+    .path.top    { grid-area: 1 / 7 / 7 / 10;  grid-template: repeat(6, 1fr) / repeat(3, 1fr); }
+    .path.bottom { grid-area: 10 / 7 / 16 / 10; grid-template: repeat(6, 1fr) / repeat(3, 1fr); }
+    .path.left   { grid-area: 7 / 1 / 10 / 7;  grid-template: repeat(3, 1fr) / repeat(6, 1fr); }
+    .path.right  { grid-area: 7 / 10 / 10 / 16; grid-template: repeat(3, 1fr) / repeat(6, 1fr); }
+
+    
+    .path i {
+      position: relative;
+      background: #fff;
+      box-shadow: inset 0 0 0 1px var(--line);
+    }
+
+    .path i.r { background: var(--red); }
+    .path i.g { background: var(--green); }
+    .path i.b { background: var(--blue); }
+    .path i.y { background: var(--yellow); }
+
+    
+    .path i.s::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 54px;
+      height: 52px;
+      transform: translate(-50%, -50%);
+      background: #000;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%,
+                         50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+
+    
+    .center {
+      grid-area: 7 / 7 / 10 / 10;
+      position: relative;
+    }
+    .center div { position: absolute; inset: 0; }
+    .center .t-green  { background: var(--green);  clip-path: polygon(0 0, 100% 0, 50% 50%); }
+    .center .t-yellow { background: var(--yellow); clip-path: polygon(100% 0, 100% 100%, 50% 50%); }
+    .center .t-blue   { background: var(--blue);   clip-path: polygon(0 100%, 100% 100%, 50% 50%); }
+    .center .t-red    { background: var(--red);    clip-path: polygon(0 0, 0 100%, 50% 50%); }
+  </style>
+</head>
+<body>
+
+  <div class="board">
+
+   
+    <div class="home red">    <div class="box"><span></span><span></span><span></span><span></span></div></div>
+    <div class="home green">  <div class="box"><span></span><span></span><span></span><span></span></div></div>
+    <div class="home blue">   <div class="box"><span></span><span></span><span></span><span></span></div></div>
+    <div class="home yellow"> <div class="box"><span></span><span></span><span></span><span></span></div></div>
+
+   
+    <div class="path top">
+      <i></i><i></i><i></i>
+      <i></i><i class="g"></i><i class="g s"></i>
+      <i class="g s"></i><i class="g"></i><i></i>
+      <i></i><i class="g"></i><i></i>
+      <i></i><i class="g"></i><i></i>
+      <i></i><i class="g"></i><i></i>
+    </div>
+
+   
+    <div class="path left">
+      <i></i><i class="r s"></i><i></i><i></i><i></i><i></i>
+      <i></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i>
+      <i></i><i></i><i class="r s"></i><i></i><i></i><i></i>
+    </div>
+
+    
+    <div class="path right">
+      <i></i><i></i><i></i><i class="y s"></i><i></i><i></i>
+      <i class="y"></i><i class="y"></i><i class="y"></i><i class="y"></i><i class="y"></i><i></i>
+      <i></i><i></i><i></i><i></i><i class="y s"></i><i></i>
+    </div>
+
+    
+    <div class="path bottom">
+      <i></i><i class="b"></i><i></i>
+      <i></i><i class="b"></i><i></i>
+      <i></i><i class="b"></i><i></i>
+      <i></i><i class="b"></i><i class="b s"></i>
+      <i class="b s"></i><i class="b"></i><i></i>
+      <i></i><i></i><i></i>
+    </div>
+
+    
+    <div class="center">
+      <div class="t-green"></div>
+      <div class="t-yellow"></div>
+      <div class="t-blue"></div>
+      <div class="t-red"></div>
+    </div>
+
+  </div>
+
+</body>
+</html>

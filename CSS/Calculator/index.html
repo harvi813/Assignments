@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #1c1c1c;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    
+    .calculator {
+      width: 609px;
+      height: 857px;
+      padding: 0 49px 0 42px;
+      background: #1c1c1c;
+    }
+
+    
+    .display {
+      height: 214px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding-bottom: 36px;
+      color: #ffffff;
+      font-size: 146px;
+      line-height: 1;
+      text-align: right;
+    }
+
+    
+    .keys {
+      display: grid;
+      grid-template-columns: repeat(4, 109px);
+      grid-auto-rows: 108px;
+      column-gap: 27px;
+      row-gap: 17px;
+    }
+
+    .key {
+      border: none;
+      border-radius: 54px;
+      font-family: inherit;
+      font-size: 36px;
+      color: #ffffff;
+      background: #505050;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .key.light {
+      background: #a5a5a5;
+      color: #1c1c1c;
+    }
+
+    .key.orange {
+      background: #ff9500;
+      color: #ffffff;
+    }
+
+    
+    .key.zero {
+      grid-column: span 2;
+      justify-content: flex-start;
+      padding-left: 32px;
+    }
+
+    .key:active {
+      filter: brightness(1.25);
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <div class="display">7744</div>
+
+    <div class="keys">
+      <button class="key light">C</button>
+      <button class="key light">+/-</button>
+      <button class="key light">%</button>
+      <button class="key orange">÷</button>
+
+      <button class="key">7</button>
+      <button class="key">8</button>
+      <button class="key">9</button>
+      <button class="key orange">x</button>
+
+      <button class="key">4</button>
+      <button class="key">5</button>
+      <button class="key">6</button>
+      <button class="key orange">-</button>
+
+      <button class="key">1</button>
+      <button class="key">2</button>
+      <button class="key">3</button>
+      <button class="key orange">+</button>
+
+      <button class="key zero">0</button>
+      <button class="key">,</button>
+      <button class="key orange">=</button>
+    </div>
+  </div>
+</body>
+</html>

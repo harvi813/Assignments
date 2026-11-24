@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sudoku</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #fff; font-family: Helvetica, Arial, sans-serif; color: #1a1a1a; }
+
+  /* Page layout: named grid areas */
+  .page {
+    display: grid;
+    grid-template-columns: 298px 298px;
+    grid-template-rows: 44px 298px;
+    grid-template-areas:
+      "t1 t2"
+      "b1 b2";
+    column-gap: 30px;
+    width: 700px;
+    height: 495px;
+    padding: 74px 0 0 38px;
+  }
+  .t1 { grid-area: t1; }
+  .t2 { grid-area: t2; }
+  .b1 { grid-area: b1; }
+  .b2 { grid-area: b2; }
+
+  h1 {
+    margin: 0;
+    display: grid;
+    place-items: center;
+    font-size: 21px;
+    font-weight: 400;
+    letter-spacing: 3.5px;
+  }
+
+  /* Board: 3x3 grid of boxes, gap = thick lines */
+  .board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2px;
+    background: #1a1a1a;
+    border: 2px solid #1a1a1a;
+  }
+
+  /* Box: 3x3 grid of cells, gap = thin lines */
+  .box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 1px;
+    background: #555;
+    background-clip: content-box;
+  }
+  .box.g span { background: #b5dcb9; }
+
+  /* Cell */
+  .box span {
+    display: grid;
+    place-items: center;
+    background: #fff;
+    font-size: 23px;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <h1 class="t1">SUDOKU</h1>
+  <h1 class="t2">ANSWER</h1>
+
+  <!-- PUZZLE -->
+  <div class="board b1">
+    <div class="box">
+      <span>8</span><span></span><span>6</span>
+      <span></span><span>4</span><span></span>
+      <span>2</span><span></span><span></span>
+    </div>
+    <div class="box g">
+      <span></span><span></span><span>3</span>
+      <span></span><span>1</span><span></span>
+      <span>8</span><span>7</span><span></span>
+    </div>
+    <div class="box">
+      <span></span><span>9</span><span></span>
+      <span></span><span>6</span><span>8</span>
+      <span></span><span></span><span>5</span>
+    </div>
+
+    <div class="box g">
+      <span>1</span><span></span><span>8</span>
+      <span></span><span>3</span><span></span>
+      <span>7</span><span></span><span>5</span>
+    </div>
+    <div class="box">
+      <span></span><span></span><span>5</span>
+      <span>1</span><span></span><span></span>
+      <span></span><span>3</span><span></span>
+    </div>
+    <div class="box g">
+      <span></span><span>2</span><span></span>
+      <span></span><span>5</span><span></span>
+      <span>9</span><span></span><span></span>
+    </div>
+
+    <div class="box">
+      <span></span><span>2</span><span>1</span>
+      <span>6</span><span></span><span></span>
+      <span></span><span>8</span><span>7</span>
+    </div>
+    <div class="box g">
+      <span></span><span></span><span>7</span>
+      <span></span><span>2</span><span></span>
+      <span>6</span><span></span><span>4</span>
+    </div>
+    <div class="box">
+      <span></span><span>4</span><span></span>
+      <span>8</span><span></span><span></span>
+      <span></span><span></span><span>3</span>
+    </div>
+  </div>
+
+  <!-- ANSWER -->
+  <div class="board b2">
+    <div class="box">
+      <span>8</span><span>7</span><span>6</span>
+      <span>5</span><span>4</span><span>3</span>
+      <span>2</span><span>1</span><span>9</span>
+    </div>
+    <div class="box g">
+      <span>5</span><span>4</span><span>3</span>
+      <span>2</span><span>1</span><span>9</span>
+      <span>8</span><span>7</span><span>6</span>
+    </div>
+    <div class="box">
+      <span>1</span><span>9</span><span>2</span>
+      <span>7</span><span>6</span><span>8</span>
+      <span>4</span><span>3</span><span>5</span>
+    </div>
+
+    <div class="box g">
+      <span>1</span><span>9</span><span>8</span>
+      <span>4</span><span>3</span><span>2</span>
+      <span>7</span><span>6</span><span>5</span>
+    </div>
+    <div class="box">
+      <span>7</span><span>6</span><span>5</span>
+      <span>1</span><span>9</span><span>8</span>
+      <span>4</span><span>3</span><span>2</span>
+    </div>
+    <div class="box g">
+      <span>3</span><span>2</span><span>4</span>
+      <span>6</span><span>5</span><span>7</span>
+      <span>9</span><span>8</span><span>1</span>
+    </div>
+
+    <div class="box">
+      <span>3</span><span>2</span><span>1</span>
+      <span>6</span><span>5</span><span>4</span>
+      <span>9</span><span>8</span><span>7</span>
+    </div>
+    <div class="box g">
+      <span>9</span><span>8</span><span>7</span>
+      <span>3</span><span>2</span><span>1</span>
+      <span>6</span><span>5</span><span>4</span>
+    </div>
+    <div class="box">
+      <span>5</span><span>4</span><span>6</span>
+      <span>8</span><span>7</span><span>9</span>
+      <span>2</span><span>1</span><span>3</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

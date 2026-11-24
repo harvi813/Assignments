@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTube Home Clone</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #181818;
+    --text: #ffffff;
+    --text-2: #aaaaaa;
+    --chip: #272727;
+    --hover: #3d3d3d;
+    --line: #303030;
+    --blue: #3ea6ff;
+  }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Roboto", Arial, sans-serif;
+    min-height: 100%;
+    overflow-x: hidden;
+  }
+
+  svg { fill: currentColor; display: block; }
+
+  
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 50px;
+    background: var(--bg);
+    z-index: 10;
+  }
+
+  .menu-btn {
+    position: absolute;
+    left: 22px; top: 13px;
+    width: 24px; height: 24px;
+  }
+
+  .logo {
+    position: absolute;
+    left: 60px; top: 16px;
+    display: flex; align-items: center;
+    height: 20px;
+  }
+  .logo-icon {
+    width: 29px; height: 20px;
+    background: #ff0000;
+    border-radius: 6px;
+    position: relative;
+    margin-right: 3px;
+  }
+  .logo-icon::after {
+    content: "";
+    position: absolute;
+    left: 11px; top: 5px;
+    border-left: 9px solid #fff;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+  }
+  .logo-text {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -1.4px;
+    transform: scaleY(1.1);
+  }
+
+  .search {
+    position: absolute;
+    left: 351px; top: 7px;
+    width: 534px; height: 36px;
+    display: flex;
+  }
+  .search input {
+    flex: 1;
+    background: #121212;
+    border: 1px solid #303030;
+    border-right: none;
+    color: #fff;
+    font-size: 15px;
+    font-family: inherit;
+    padding: 0 6px;
+    outline: none;
+  }
+  .search input::placeholder { color: #888; }
+  .search button {
+    width: 57px;
+    background: #272727;
+    border: 1px solid #303030;
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+
+  .mic {
+    position: absolute;
+    left: 900px; top: 13px;
+    width: 24px; height: 24px;
+  }
+
+  .header-right {
+    position: absolute;
+    right: 0; top: 0;
+    height: 50px;
+    display: flex; align-items: center;
+    padding-right: 24px;
+  }
+  .header-right .icon { width: 24px; height: 24px; margin-right: 20px; }
+  .avatar-top {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 35%, #e8b49a 0 25%, #c0392b 26% 100%);
+  }
+
+  
+  aside {
+    position: fixed;
+    top: 50px; left: 0; bottom: 0;
+    width: 220px;
+    background: var(--bg);
+    overflow: hidden;
+    padding-top: 16px;
+  }
+  .nav-item {
+    display: flex; align-items: center;
+    height: 34px;
+    width: 200px;
+    padding-left: 11px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .nav-item.active { background: #272727; font-weight: 500; }
+  .nav-item svg { width: 24px; height: 24px; margin-right: 21px; }
+  .divider { height: 1px; background: var(--line); width: 200px; margin: 8px 0 16px; }
+  .sub-title {
+    font-size: 14px; font-weight: 500;
+    color: var(--text-2);
+    padding-left: 21px;
+    margin: 0 0 8px;
+    letter-spacing: .3px;
+  }
+  .sub-item {
+    display: flex; align-items: center;
+    height: 36px;
+    padding-left: 20px;
+    font-size: 14px;
+    position: relative;
+  }
+  .sub-item .ava {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    margin-right: 23px;
+    flex-shrink: 0;
+  }
+  .sub-item .dot {
+    position: absolute;
+    right: 28px;
+    width: 4px; height: 4px;
+    background: var(--blue);
+    border-radius: 50%;
+  }
+
+  
+  main {
+    position: absolute;
+    top: 50px; left: 230px; right: 0;
+  }
+
+  .chips {
+    position: fixed;
+    top: 50px; left: 230px; right: 0;
+    height: 50px;
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: center;
+    padding-left: 12px;
+    overflow: hidden;
+    z-index: 5;
+  }
+  .chip {
+    flex-shrink: 0;
+    height: 30px;
+    padding: 0 12px;
+    margin-right: 12px;
+    background: var(--chip);
+    border: 1px solid #333;
+    border-radius: 16px;
+    font-size: 14px;
+    display: flex; align-items: center;
+    white-space: nowrap;
+  }
+  .chip.active { background: #fff; color: #000; border-color: #fff; font-weight: 500; }
+  .chip-arrow {
+    position: absolute;
+    right: 0; top: 0;
+    width: 50px; height: 49px;
+    background: linear-gradient(90deg, transparent, var(--bg) 40%);
+    display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 12px;
+  }
+  .chip-arrow svg { width: 24px; height: 24px; }
+
+  .grid {
+    margin-top: 70px;          
+    padding-left: 12px;
+    display: grid;
+    grid-template-columns: repeat(4, 242px);
+    column-gap: 14px;
+    row-gap: 0;
+  }
+
+  .card { height: 254px; }
+
+  .thumb {
+    width: 242px; height: 136px;
+    position: relative;
+    overflow: hidden;
+  }
+  .thumb span {
+    position: absolute;
+    left: 8px; bottom: 8px;
+    font-weight: 700; font-size: 15px;
+    color: rgba(255,255,255,.9);
+    text-shadow: 0 1px 4px rgba(0,0,0,.6);
+  }
+  .hd-badge {
+    position: absolute;
+    top: 8px; right: 8px;
+    background: rgba(0,0,0,.7);
+    font-size: 8px; font-weight: 700;
+    padding: 1px 4px; border-radius: 3px;
+  }
+
+  .meta { display: flex; margin-top: 12px; }
+  .ch-ava {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+  .title {
+    font-size: 15px; font-weight: 500;
+    line-height: 17px;
+    letter-spacing: -.4px;
+    max-height: 34px;
+    overflow: hidden;
+  }
+  .sub-text {
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 17px;
+    margin-top: 6px;
+    letter-spacing: -.2px;
+  }
+  .check {
+    display: inline-block;
+    width: 11px; height: 11px;
+    background: #909090;
+    border-radius: 50%;
+    margin-left: 6px;
+    vertical-align: -1px;
+    position: relative;
+  }
+  .check::after {
+    content: "";
+    position: absolute;
+    left: 3px; top: 1px;
+    width: 3px; height: 6px;
+    border: solid #181818;
+    border-width: 0 1.5px 1.5px 0;
+    transform: rotate(45deg);
+  }
+  .mix-meta { margin-top: 12px; }
+  .mix-meta .title { margin-bottom: 4px; }
+  .mix-meta .sub-text { margin-top: 0; font-size: 13px; }
+  .meta-body { flex: 1; min-width: 0; }
+</style>
+</head>
+<body>
+
+
+<header>
+  <svg class="menu-btn" viewBox="0 0 24 24"><path d="M21 6H3V5h18v1zm0 5H3v1h18v-1zm0 6H3v1h18v-1z"/></svg>
+
+  <div class="logo">
+    <div class="logo-icon"></div>
+    <div class="logo-text">YouTube</div>
+  </div>
+
+  <div class="search">
+    <input type="text" placeholder="Search">
+    <button>
+      <svg viewBox="0 0 24 24" width="24" height="24"><path d="M20.87 20.17l-5.59-5.59A6.96 6.96 0 0017 10c0-3.87-3.13-7-7-7s-7 3.13-7 7 3.13 7 7 7c1.71 0 3.28-.62 4.5-1.65l5.59 5.59.78-.77zM10 16c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z" transform="scale(1)"/></svg>
+    </button>
+  </div>
+
+  <svg class="mic" viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5-3c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+
+  <div class="header-right">
+    <svg class="icon" viewBox="0 0 24 24"><path d="M14 13h-3v3H9v-3H6v-2h3V8h2v3h3v2zm3-7H3v12h14v-6.39l4 1.83V8.56l-4 1.83V6m1-1v3.83L22 7v8l-4-1.83V19H2V5h16z"/></svg>
+    <svg class="icon" viewBox="0 0 24 24"><path d="M4 4h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 10h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 16h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4z" opacity=".95"/></svg>
+    <svg class="icon" viewBox="0 0 24 24"><path d="M10 20h4c0 1.1-.9 2-2 2s-2-.9-2-2zm10-2.65V19H4v-1.65l2-1.88v-5.15C6 7.4 7.56 5.1 10 4.34v-.38c0-1.42 1.49-2.5 2.99-1.76.65.32 1.01 1.03 1.01 1.76v.39c2.44.75 4 3.06 4 5.98v5.15l2 1.87zm-1 .42l-2-1.88v-5.47c0-2.47-1.19-4.36-3.13-5.1-1.26-.53-2.64-.5-3.84.03C8.15 6.11 7 7.99 7 10.42v5.47l-2 1.88V18h14v-.23z"/></svg>
+    <div class="avatar-top"></div>
+  </div>
+</header>
+
+<!-- ================= SIDEBAR ================= -->
+<aside>
+  <div class="nav-item active">
+    <svg viewBox="0 0 24 24"><path d="M4 21V10.08l8-6.96 8 6.96V21h-6v-6h-4v6H4z"/></svg>Home
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 19a9 9 0 110-18 9 9 0 010 18zm-5-4l3.5-7.5L18 6l-3.5 7.5L7 17zm5-4.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" /></svg>Explores
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M17.77 10.32l-1.2-.5L18 9.06a3.74 3.74 0 00-3.5-6.62L6 6.94a3.74 3.74 0 00.23 6.74l1.2.49L6 14.93a3.75 3.75 0 003.5 6.63l8.5-4.5a3.74 3.74 0 00-.23-6.74zM10 14.65v-5.3L15 12l-5 2.65z"/></svg>Shorts
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M10 18v-6l5 3-5 3zm7-15H7v1h10V3zm3 3H4v1h16V6zm2 3H2v12h20V9zM3 10h18v10H3V10z"/></svg>Subscriptions
+  </div>
+
+  <div class="divider" style="margin-top:12px;"></div>
+
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M11 7l6 3.5-6 3.5V7zm7 13H4V6H3v15h15v-1zm3-2H6V3h15v15zM7 17h13V4H7v13z"/></svg>Library
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M14.97 16.95L10 13.87V7h2v5.76l4.03 2.49-1.06 1.7zM12 3c-4.96 0-9 4.04-9 9s4.04 9 9 9 9-4.04 9-9-4.04-9-9-9m0-1c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2z"/></svg>History
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M10 8l6 4-6 4V8zm11-5v18H3V3h18zm-1 1H4v16h16V4z"/></svg>Your videos
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 19a9 9 0 110-18 9 9 0 010 18zm1-14h-1v6l4.5 2.7.5-.86-4-2.4V7z"/></svg>Watch later
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M18.77 11h-4.23l1.52-4.94C16.38 5.03 15.54 4 14.38 4c-.58 0-1.14.24-1.52.65L7 11H3v10h4h1h9.43c1.06 0 1.98-.67 2.19-1.61l1.34-6c.27-1.21-.69-2.39-1.19-2.39zM7 20H4v-8h3v8zm12.98-6.83l-1.34 6c-.1.48-.58.83-1.21.83H8v-8.61l5.6-6.06c.19-.2.44-.33.78-.33.26 0 .5.11.63.3.07.1.15.26.09.47l-1.52 4.94-.4 1.29h5.65c.4 0 .64.25.55.67z"/></svg>Liked videos
+  </div>
+  <div class="nav-item">
+    <svg viewBox="0 0 24 24"><path d="M12 15.7L5.3 9l.7-.7 6 6 6-6 .7.7-6.7 6.7z"/></svg>Show more
+  </div>
+
+  <div class="divider" style="margin-top:14px;"></div>
+
+  <div class="sub-title">SUBSCRIPTIONS</div>
+  <div class="sub-item"><div class="ava" style="background:linear-gradient(135deg,#2c7a7b,#1a1a1a)"></div>Nadir On The Go<span class="dot"></span></div>
+  <div class="sub-item"><div class="ava" style="background:#e53935"></div>Coke Studio Bangla<span class="dot"></span></div>
+  <div class="sub-item"><div class="ava" style="background:radial-gradient(circle at 50% 35%,#c98b6b 0 28%,#333 30%)"></div>MKBHD</div>
+  <div class="sub-item"><div class="ava" style="background:conic-gradient(#f24e1e 0 25%,#a259ff 0 50%,#0acf83 0 75%,#1abcfe 0)"></div>Figma<span class="dot"></span></div>
+  <div class="sub-item"><div class="ava" style="background:#111;border:1px solid #333"></div>ATC Android ToTo C...</div>
+  <div class="sub-item"><div class="ava" style="background:#29b6f6"></div>Alux.com<span class="dot"></span></div>
+</aside>
+
+
+<div class="chips">
+  <div class="chip active">All</div>
+  <div class="chip">Cook Studio</div>
+  <div class="chip">UX</div>
+  <div class="chip">Case Study</div>
+  <div class="chip">Music</div>
+  <div class="chip">Bnagla Lofi</div>
+  <div class="chip">Tour</div>
+  <div class="chip">Saintmartin</div>
+  <div class="chip">Tech</div>
+  <div class="chip">iPhone 13</div>
+  <div class="chip">User Interface Design</div>
+  <div class="chip">Computer</div>
+  <div class="chip-arrow">
+    <svg viewBox="0 0 24 24"><path d="M9.4 6L8.7 6.7 14 12l-5.3 5.3.7.7 6-6z"/></svg>
+  </div>
+</div>
+
+<main>
+  <div class="grid">
+
+   
+    <div class="card">
+      <div class="thumb" style="background:linear-gradient(120deg,#8b1a2b,#c2185b 60%,#3b1d2e)"></div>
+      <div class="meta">
+        <div class="ch-ava" style="background:#e53935"></div>
+        <div class="meta-body">
+          <div class="title">Bulbuli | Coke Studio Bangla | Season One | Ritu Raj X Nandita</div>
+          <div class="sub-text">Coke Studio Bangla<i class="check"></i><br>1.5M views • 2 days ago</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="thumb" style="background:linear-gradient(120deg,#3a3a3a,#6b6b6b 55%,#2a2a2a)"></div>
+      <div class="meta">
+        <div class="ch-ava" style="background:#111;border:1px solid #333"></div>
+        <div class="meta-body">
+          <div class="title">Infinix Note 12 : AMOLED &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Helio G88 SoC!</div>
+          <div class="sub-text">ATC Andriod ToTo Company<i class="check"></i><br>4.2M views • 2 days ago</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="thumb" style="background:linear-gradient(120deg,#ff5722,#ffd600 50%,#e53935);border:3px solid #ffeb3b"></div>
+      <div class="meta">
+        <div class="ch-ava" style="background:linear-gradient(135deg,#2c7a9b,#1a3a4a)"></div>
+        <div class="meta-body">
+          <div class="title">My first UX Design case study - This got me my first job.</div>
+          <div class="sub-text">Saptarshi Prakash<br>4.8K views • 1 years ago</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="thumb" style="background:linear-gradient(120deg,#8d7b68,#c9b79c 55%,#6d5a48)"><div class="hd-badge">HD</div></div>
+      <div class="mix-meta">
+        <div class="title" style="font-size:15px;">My Mix</div>
+        <div class="sub-text" style="margin-top:8px;">Lopamudra Mitra, Anupam Roy, and more</div>
+      </div>
+    </div>
+
+    <
+    <div class="card">
+      <div class="thumb" style="background:linear-gradient(120deg,#e0221e,#f2f2f2 55%,#e0221e)"></div>
+      <div class="meta">
+        <div class="ch-ava" style="background:linear-gradient(135deg,#4aa3a3,#d6c28a)"></div>
+        <div class="meta-body">
+          <div class="title">UX Design - What is it? (From AJ &amp;Smart)</div>
+          <div class="sub-text" style="margin-top:12px;">AJ&amp;Smar<i class="check" style="margin-left:6px"></i><br>150K views • 3 years ago</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="thumb" style="background:linear-gradient(120deg,#1a0a1f,#5b1a4a 55%,#1a0a1f)"></div>
+      <div class="meta">
+        <div class="meta-body">
+          <div class="title">Mix - Mombati | Mohon Sharif | Dhakaiya Dose | Mahib Ahsan ft Anika</div>
+          <div class="sub-text" style="margin-top:11px;">Mohon Sharif, Odd Signature, Shayan Chowdhury Arnob, and more</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="thumb" style="background:linear-gradient(120deg,#2aa6b8,#6ec6d4 60%,#1a7f90)"></div>
+      <div class="meta">
+        <div class="ch-ava" style="background:linear-gradient(135deg,#2c7a7b,#1a1a1a)"></div>
+        <div class="meta-body">
+          <div class="title" style="padding-top:18px;">| 48 VISA-FREE</div>
+          <div class="sub-text" style="margin-top:20px;">Nadir On The Go<br>1.7M views • 1 years ago</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="thumb" style="background:linear-gradient(120deg,#7b1fa2,#e91e63 50%,#311b92);border:3px solid #e91e8c"></div>
+      <div class="meta">
+        <div class="ch-ava" style="background:radial-gradient(circle at 50% 40%,#f5c26b 0 40%,#e0a030 41%)"></div>
+        <div class="meta-body">
+          <div class="title">14 Advanced Tips to Design FASTER in Figma</div>
+          <div class="sub-text" style="margin-top:12px;">Mizko<i class="check"></i><br>53K views • 1 years ago</div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="card"><div class="thumb" style="background:linear-gradient(120deg,#c9a24c,#e8c98a 55%,#8a6a2a)"></div></div>
+    <div class="card"><div class="thumb" style="background:linear-gradient(120deg,#0b8de0,#27a9ff 55%,#0a6fb5)"></div></div>
+    <div class="card"><div class="thumb" style="background:linear-gradient(120deg,#5b7fa8,#9bb6d4 55%,#3a5a80)"></div></div>
+    <div class="card"><div class="thumb" style="background:linear-gradient(120deg,#d9a35b,#f0d09a 55%,#a06a2a)"></div></div>
+
+  </div>
+</main>
+
+</body>
+</html>
