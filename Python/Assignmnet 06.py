@@ -1,5 +1,4 @@
 # ASSIGNMENT 6 — PYTHON SOLUTIONS
-
 # =========================
 # PART 1 — PATTERNS
 # =========================
