@@ -150,3 +150,146 @@ function calculateSimpleInterest(principal, rate, time){
 
 console.log(calculateSimpleInterest(1000,5,3))
 console.log(calculateSimpleInterest(20000,9,12))
+
+
+//================================================
+// Section 8: Function Scope
+//================================================
+
+
+//1
+function showCity() {
+    let city = "Ahmedabad";
+    console.log(city);
+}
+
+showCity();
+
+console.log(city);
+
+//2
+
+let trainer = "CodingGita Mentor";
+
+function displayTrainer() {
+    console.log(trainer);
+}
+
+displayTrainer();
+
+console.log(trainer);
+
+//3
+function demoScope() {
+    let value = 50;
+    console.log(value);
+}
+
+demoScope();
+
+console.log(value);
+
+
+//================================================
+// Section 9: Combining Function Concepts
+//================================================
+
+
+//1
+function generateMessage(name, score) {
+    let result;
+
+    if (score >= 40) {
+        result = "Pass";
+    } else {
+        result = "Fail";
+    }
+
+    return name + " has scored " + score + " and the result is " + result;
+}
+
+console.log(generateMessage("Aarav", 65));
+
+//2
+function billCalculator(item1, item2, item3) {
+    let total = item1 + item2 + item3;
+
+    if (total >= 1000) {
+        return "Total = " + total + ", Discount Applied";
+    } else {
+        return "Total = " + total + ", No Discount";
+    }
+}
+
+console.log(billCalculator(400, 350, 300));
+console.log(billCalculator(200, 300, 100));
+
+//3
+function performanceReport(student, m1, m2, m3) {
+    let total = m1 + m2 + m3;
+    let average = total / 3;
+    let remark;
+
+    if (average >= 80) {
+        remark = "Excellent";
+    } else {
+        remark = "Keep Improving";
+    }
+
+    return "Name: " + student +
+           ", Total: " + total +
+           ", Average: " + average +
+           ", Remark: " + remark;
+}
+
+console.log(performanceReport("Aarav", 90, 85, 95));
+
+
+//================================================
+// Section 10: Nested Functions
+//================================================
+
+
+//1
+function mainTask() {
+
+    function helperTask() {
+        return "Task completed successfully";
+    }
+
+    return helperTask();
+}
+
+console.log(mainTask());
+
+//2
+function calculateFinal(m1, m2) {
+
+    function getTotal() {
+        return m1 + m2;
+    }
+
+    return "Final marks = " + getTotal();
+}
+
+console.log(calculateFinal(40, 50));
+
+//3
+function studentStatus(name, marks) {
+
+    function getGrade() {
+        if (marks >= 80) {
+            return "A";
+        } else if (marks >= 60) {
+            return "B";
+        } else {
+            return "C";
+        }
+    }
+
+    return name + " has received grade " + getGrade();
+}
+
+console.log(studentStatus("Aarav", 85));
+console.log(studentStatus("Riya", 65));
+console.log(studentStatus("Rahul", 45));
